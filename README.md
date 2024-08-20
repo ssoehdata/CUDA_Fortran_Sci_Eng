@@ -3,4 +3,4 @@ Working through examples from the Cuda Fortran for Scientists and Engineers 2nd 
 
 Learning the NVIDIA HPC SDK
 
-![Fortran](https://a11ybadges.com/badge?logo=fortran) 
+![Fortran](https://a11ybadges.com/badge?logo=fortran) ![alt text](https://github.com/ssoehdata/CUDA_Fortran_Sci_Eng/blob/main/nvidia_hpc_dev.jpg)
