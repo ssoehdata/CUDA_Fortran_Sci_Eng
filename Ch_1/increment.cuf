@@ -1,10 +1,18 @@
 module m 
 contains
+! attributes(global): this indicates the code is to run on the 
+! the device (gpu) but is called from the host(cpu)
     attributes(global) subroutine increment(a, b)
         implicit none
         integer, intent(inout) :: a(*)
         integer, value :: b
         integer :: i 
+
+! these two lines  replace the std  Fortran index init and do loop 
+! serial vs. parallel execution: incrementing elements in array a is done 
+! on many GPU threads concurrently in the CudaFortran versions here
+! (vs sequentially in std cpu fortran code)
+! threads are identified by the threadIdx variable and is used as an index of the array
 
         i = threadIdx%x
         a(i) = a(i)+b 
@@ -18,6 +26,8 @@ program incrementGPU
     use m 
     implicit none 
     integer, parameter :: n = 256 
+! the "_d" var suffix is not required, but helps in differentiating 
+! device from host variables
     integer :: a(n), b 
     integer, device :: a_d(n)
 
