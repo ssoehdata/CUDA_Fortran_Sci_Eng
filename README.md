@@ -10,7 +10,6 @@ Learning the NVIDIA HPC SDK / Cuda Fortran
 ![alt text](https://github.com/ssoehdata/CUDA_Fortran_Sci_Eng/blob/main/nvidia_hpc_dev.jpg)
 
 
-
 ### Table of Contents
 ####<ul><li>Ch_1    Introduction / Basic Concepts</ul></li>
 #### <ul><li><Ch_2  Correctness, accuracy, and debugging/ul></li> 
