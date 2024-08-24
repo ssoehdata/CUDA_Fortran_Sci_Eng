@@ -24,3 +24,4 @@ Learning the NVIDIA HPC SDK / Cuda Fortran
 #### <ul><li>Ch_10  Finie difference method</ul></li>
 #### <ul><li>Ch_11  Applications of the fast Fourier transform (FFT)</ul></li>
 #### <ul><li>Ch_12  Ray tracing</ul></li>
+#### <ul><li>Appendix (not incl. in repo)</ul></li>
