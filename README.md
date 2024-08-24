@@ -19,9 +19,9 @@ Learning the NVIDIA HPC SDK / Cuda Fortran
 #### <ul><li>Ch_5   Optimization</ul></li>
 #### <ul><li>Ch_6   Porting tips and techniques</ul></li>
 #### <ul><li>Ch_7   Interfacing withy CUDA C code and CUDA libraries</ul></li>
-#### <ul><li>Ch_8   Multi-GPU programming</ul></li
-#### <ul><li>PART 2 Case Studies</ul></li>>
-#### <ul><li>Ch_9   Monte Carlo method</ul></li>>
-#### <ul><li>Ch_10  Finie difference method</ul></li>>
-#### <ul><li>Ch_11  Applications of the fast Fourier transform (FFT)</ul></li>>
-#### <ul><li>Ch_12  Ray tracing</ul></li>>
+#### <ul><li>Ch_8   Multi-GPU programming</ul></li>
+#### <ul><li>PART 2 Case Studies</ul></li>
+#### <ul><li>Ch_9   Monte Carlo method</ul></li>
+#### <ul><li>Ch_10  Finie difference method</ul></li>
+#### <ul><li>Ch_11  Applications of the fast Fourier transform (FFT)</ul></li>
+#### <ul><li>Ch_12  Ray tracing</ul></li>
