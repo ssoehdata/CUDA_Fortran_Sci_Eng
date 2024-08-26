@@ -1,0 +1,28 @@
+! combining the compiler auto writing and launching CUF kernels
+! with kernel loop directives w runtime handling of
+! data transfers between host and device w managed variables
+
+program managedCUF
+    use cudafor 
+    implicit none 
+    integer, parameter :: nx=1024, ny=512 
+    integer, managed :: a(nx,ny)
+    integer :: b, i, j 
+
+    a = 1 
+    b = 3 
+
+    !$cuf kernel do (2) <<<*,*>>>
+    do j = 1, ny 
+        do i = 1, nx 
+            a(i, j) = a(i,j) + b 
+        end do 
+    end do 
+    i = cudaDeviceSynchronize() 
+
+    if (any(a /= 4)) then 
+        print*, ' **** Program Failed ***' 
+    else
+        print*, ' **** Program Passed ***' 
+    endif 
+end program managedCUF 

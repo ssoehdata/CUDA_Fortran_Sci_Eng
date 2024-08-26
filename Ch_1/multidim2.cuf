@@ -1,0 +1,30 @@
+! kernel loop directives auto generate and invoke
+! cuf kernels,so they need not be explicitly written
+! below is the CUF kernel version of the multidim increment code
+
+
+program multidimCUF
+    use cudafor 
+    implicit none 
+    integer, parameter :: nx=1024, ny=512
+    integer  :: a(nx,ny), b,  i, j 
+    integer, device :: a_d(nx, ny)
+
+    a = 1 
+    b = 3
+
+    a_d = a 
+    !$cuf kernel do (2) <<<*,*>>>
+    do j = 1, ny
+       do i = 1, nx 
+        a_d(i, j) = a_d(i, j) + b 
+       end do 
+    end do 
+    a = a_d 
+
+    if (any(a /= 4)) then 
+        print*, ' *** Program Failed *** '
+    else
+        print*, ' *** Program Passed *** '
+    endif 
+end program multidimCUF 

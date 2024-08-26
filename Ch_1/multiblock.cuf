@@ -1,3 +1,9 @@
+! thread block and number of thread configuration(useful for larger arrays):
+
+! when the kernel is invoked, a grid of thread blocks are launched 
+! the number of threadblocks (tBlock) is specfied by the first parameter
+! the number of threads in a threadblock is specified by a second paramter
+
 module m 
 contains 
     attributes(global) subroutine increment(a, n , b)

@@ -1,4 +1,8 @@
 ! multidimensional array 
+! dim3 is a derived type containing x,y,z fields
+! the blocks per grid as well as the number of threads per block 
+! can also be of type dim3 (as opposed to integers as in prev example 'multiblock') 
+
 module m 
 contains 
     attributes(global) subroutine increment(a, n1, n2, b)
