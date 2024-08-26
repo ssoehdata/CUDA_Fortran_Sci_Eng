@@ -1,0 +1,46 @@
+! common differences in floating point result from serial and parallel computation:
+! floating point arithmetic is not associative- order of operations affects
+! the result.
+! This example calulates the sum of integers from 1 to 1,000,000 using 
+! several different techniques. 
+
+
+! Some notes on the accuracy of the floating-point accumulation in this code: 
+
+! the method n8/2*(n8+1) produces an accurate result, the others are in error.
+! the other methods calculate the sum using single precision floating point arithmetic
+! and stored in a single precision array a, which is used in the sum arguments. 
+
+! N.B.: compiling the same code but adding the -fast switch produces different values
+! due to differing order of operations (although the prev correct method remains accurate)
+
+
+
+program main 
+    use cudafor 
+    implicit none 
+    integer, parameter :: n=1000000
+    integer(8), parameter :: n8 = n 
+
+    real :: suminc = 0.0, sumdec = 0.0, a(n)
+    real, device  :: a_d(n)
+    integer :: i 
+
+    do i = 1, n 
+        a(i) = i 
+        suminc = suminc + i 
+    enddo
+
+    print *, 'n:  ', n 
+    print *, 'n*(n+1)/2:',  n8/2*(n8+1)
+
+    do i = n, 1, -1
+        sumdec = sumdec + i 
+    end do 
+
+    print*, 'from sum(a):       ',  sum(a)
+    print*, 'incr accumulation: ',  suminc 
+    print*,  'decr accumulation: ', sumdec 
+    a_d = a 
+    print *, 'from sum(a_d):     ', sum(a_d)
+end program main 
