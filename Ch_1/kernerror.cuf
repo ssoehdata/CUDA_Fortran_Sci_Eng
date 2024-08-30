@@ -1,0 +1,25 @@
+! Error handling in Kernels as they are subroutines and thus do 
+! not have a return value. Also, kernels execute asynchronously w respect to the host. 
+
+! To aid in error checking kernel execution and other asynchronous operations
+! cuda runtime maintains an error var that is written over when errors occur.
+! cudaPeekLastError() returns that errors' value. 
+! it also resets it to cudaSuccess. 
+
+! Kernel Execution Error Checking: 
+! can be done using in this manner
+
+call incremetn<<<1,n>>>(a_d, b)
+ierrSync = cudaGetLastError()
+ierrAsync = cudaDeviceSynchronize() 
+if (ierrSync /= cudaSuccess) & 
+    print*, 'Sync kernel error: ', & 
+    trim(cudaGetErrorString(ierrSync))
+if (ierrAsync /= , 'cudaSuccess) & 
+    print*, 'Async kernel error: ', & 
+    trim(cudaGetErrorString(ierrAsync))
+
+! the last line can also be modified to reset the variables maintained at runtime:
+
+! trim(cudaGetErrorString(cudaGetLastErorr()))
+

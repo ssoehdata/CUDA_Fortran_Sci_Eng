@@ -1,0 +1,13 @@
+! fused multiply add (FMA) instruction 
+! uses only a single rounding operation when separat
+! mult add operations are performed.
+
+
+module m 
+contains 
+    attributes(global) subroutine s(a, b, c)
+        real :: a, b, c 
+        a = a + b + c 
+    end subroutine s
+end  module m 
+

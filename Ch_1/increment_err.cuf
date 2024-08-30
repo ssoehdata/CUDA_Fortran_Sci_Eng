@@ -1,0 +1,51 @@
+! adding error checking to the kernel launch in 
+! the increment code
+! changes noted in comments
+
+
+module m 
+contains
+    attributes(global) subroutine increment(a, b)
+        implicit none
+        integer, intent(inout) :: a(*)
+        integer, value :: b
+        integer :: i 
+
+        i = threadIdx%x
+        a(i) = a(i)+b 
+
+    end subroutine increment 
+end module m
+    
+
+program asyncError                          ! changed
+    use cudafor 
+    use m 
+    implicit none 
+    integer, parameter :: n = 256 
+    integer :: a(n), b 
+    integer, device :: a_d(n)
+    integer  :: ierrSync, ierrAsync        ! added 
+
+    a = 1
+    b = 3 
+
+    a_d = a 
+    call increment<<<1,n>>>(a_d, b)
+    ierrSync = cudaGetLastError()           ! added 
+    ierrrAsync = cudaDeviceSynchronize()    ! added
+    a = a_d
+
+    if (ierrSync /= cudaSuccess) &          ! added
+        print *, 'Sync kernel error: ', &   ! added
+        trim(cudaGetErrorString(ierrAsync)) ! added 
+    if (ierrAsync /=  cudaSuccess)  &       ! added      
+        print *, 'Async kernel error: ', &  ! added
+        trim(cudaGetErrorString(ierrAsync)) ! added  
+
+    if (any(a /= 4)) then 
+        print*, '**** Program Failed ****' 
+    else 
+        print*, '**** Program Passed ****'
+    end if  
+end program asyncError
