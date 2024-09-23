@@ -1,0 +1,27 @@
+!differences from basic nvtx routine:
+! 1st diff: 
+! nvtxStartRange() and nvtxEndRange() are used in the nvtx Basic routines
+! whereas here (advanced routine) nvtxRangeStart() and nvtxRangeEnd() are used
+!2nd diff: 
+! use of range ID's as defined by the nvtxRangeID derived type
+! Range ID's are returned by the function nvtxRangeStart() and are provided as an 
+! argument to the subroutine nvtxRangeEnd()
+
+
+program main 
+    use nvtx
+    implicit none
+    type(nvtxRangeID) :: id1, id2
+    character(len=4) :: nchar
+    integer :: n 
+    id1 = nvtxRangeStart("Outer label")
+
+    do n = 1, 4
+        write(nchar, '(i4)') n 
+        id2 = nvtxRangeStart('Label '//nchar)
+        call sleep(1)
+        call nvtxRangeEnd(id2)
+    end do 
+
+    call nvtxRangeEnd(id1)
+end program main

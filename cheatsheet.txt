@@ -1,0 +1,40 @@
+
+### Collection of some compiling info for cudafor
+
+
+basic compiling:  nvfortran -o filename filename.cuf 
+
+cuda-gdb debug (incl in CUDA SDK):  nvfortran -g -gpu=nordc filename.cuf ( will generate file "a.out")
+				    
+				    
+
+FMA(Fused Multiply Add) in a single instruction: - is used by default in cudafor
+			 			 - uses a single rounding operation 
+			 			 
+			 			 to suppress:  -gpu=nofma
+			 			 to enable:    -gpu=keep
+			 			 
+			 			 options: 	  Function:
+			 			 -gpu[no]flushz   flushes denormals to zero
+			 			 		  (controls single-precision denormals)	
+			 			 		  
+			 			 -gpu=fastmath  for 32bit float data 
+			 			 		fast but less accurate operations
+			 			 		e.g.: can be set globally in compile or 
+			 			 		     in device code by explicitly calling the
+			 			 		     routine (e.g. __fdivide(x,y), __sinf(x),
+			 			 		     	     (__logf(x)  etc.)		 			 	
+
+
+NVTX (NVIDIA Tools Exension) / NVIDIA Insight (CLI commands)
+Documentation: https://docs.nvidia.com/nsight-systems/UserGuide/index.html
+ to launch nsight gui: $ nsys-ui 
+ version:  nsys --version
+check status: nsys status --environment
+NB.: settings: kernel paranoid must be set to level <=2
+
+
+compile/generate report for nsight with nvtx: 
+example: nvfortran -o nvtxBasic nvtxBasci.cuf -cudalib=nvtx 
+generate the report:  nsys profile -o nvtBasic a.out 
+(this can then be opened in the nvsight viewer)

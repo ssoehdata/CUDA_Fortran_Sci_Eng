@@ -1,0 +1,24 @@
+!  the nvtxstartrange() routine takes a char str as the first arg
+!  and an optional int as a second arg, which maps to a set of
+! predefined colors.  nvtxEndRange() takes no args.
+! compile with -cudalib=nvtx flag and profile with nsys: 
+!       nvfortran nvtxBasic.cuf -cudalib=nvtx
+!       nsys profile -o nvtxBasic a.out
+
+program main 
+    use nvtx
+    implicit none 
+    character(len=4) :: nchar 
+    integer :: n 
+
+    call nvtxStartRange("Outer Label")
+
+    do n = 1, 4 
+        write(nchar, '(i4)') n 
+        call nvtxStartRange('Label ' //nchar,n)
+        call sleep(1)
+        call nvtxEndRange()
+    end do 
+
+    call nvtxEndRange()
+end program main
