@@ -1,11 +1,3 @@
-!differences from basic nvtx routine:
-! 1st diff: 
-! nvtxStartRange() and nvtxEndRange() are used in the nvtx Basic routines
-! whereas here (advanced routine) nvtxRangeStart() and nvtxRangeEnd() are used
-!2nd diff: 
-! use of range ID's as defined by the nvtxRangeID derived type
-! Range ID's are returned by the function nvtxRangeStart() and are provided as an 
-! argument to the subroutine nvtxRangeEnd()
 
 
 program main 
