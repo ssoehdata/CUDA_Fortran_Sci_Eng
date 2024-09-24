@@ -1,6 +1,6 @@
-
-### Collection of some compiling info for cudafor
-
+########################################################################
+### Collection of some cudafor compiling and related cuda tooling info
+########################################################################
 
 basic compiling:  nvfortran -o filename filename.cuf 
 
@@ -25,11 +25,29 @@ FMA(Fused Multiply Add) in a single instruction: - is used by default in cudafor
 			 			 		     routine (e.g. __fdivide(x,y), __sinf(x),
 			 			 		     	     (__logf(x)  etc.)		 			 	
 
-
+##################################################################
 NVTX (NVIDIA Tools Exension) / NVIDIA Insight (CLI commands)
 Documentation: https://docs.nvidia.com/nsight-systems/UserGuide/index.html
- to launch nsight gui: $ nsys-ui 
- version:  nsys --version
+
+Two Options:  CLI and GUI
+
+##################################################################
+Nsight Systems CLI
+##################
+nsys stats via command line (e.g.:Bash): 
+    examples:  $ nsys stats --report cuda_gpu_trace filename.nsys-rep
+// 
+               $ nsys stats --report cuda_gpu_sum filename.nsys-rep
+
+// A Full listing of Available (built-in) Reports w/ short descriptor are found with: 
+               $ nsys stats --help-reports
+
+##################################################################
+Nsight Systems GUI
+##################
+to launch nsight gui: $ nsys-ui 
+
+version:  nsys --version
 check status: nsys status --environment
 NB.: settings: kernel paranoid must be set to level <=2
 
