@@ -1,0 +1,36 @@
+! This calculates the theoretical peak memory bandwidth(rate data can be transferred) 
+! from the memory clock and the memory bus width for all devices(GPU's) present.
+
+! See program stream.cuf for calculating effective bandwidth.
+
+! Bandwidth is an important factor with respect to performance, and how any changes in the code 
+! effect it should be a central consideration when when making code changes 
+! for performance optimization.
+! Choice of memory, how data is laid out, and order in which it is accessed, 
+! can dramatically effect Bandwidth.
+
+! When evaluating mem efficiency, both theoretical peak mem bandwidth and the observed
+! or effective bandwidth are used. 
+
+
+program peakBandwidth
+    use cudafor 
+    implicit none 
+    integer :: i, istat, nDevices=0
+    type (cudaDeviceProp) :: prop 
+
+    istat = cudaGetDeviceCount(nDevices)
+    do i = 0, nDevices-1 
+        istat = cudaGetDeviceProperties(prop, i) 
+        print "(' Device Number: ',i0)", 1
+        print "(' Device name: ',a)", trim(prop%name)
+        print "(' Memory Clock Rate (KHz): ',i0)", &
+            prop%memoryClockRate 
+        print "(' Memory Bus Width (bits): ', i0)", &
+            prop%memoryBusWidth 
+        print "(' Memory BandWidth (GB/s): ', f9.2)", &
+            2.0 * prop%memoryClockRate * & 
+            (prop%memoryBusWidth / 8) * 1.e-6 
+        print *
+    enddo 
+end program peakBandwidth

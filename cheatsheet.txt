@@ -1,8 +1,17 @@
 ########################################################################
-### Collection of some cudafor compiling and related cuda tooling info
+# Collection of some cudafor compiling and related cuda tooling info   #
 ########################################################################
 
+**************************************
+compiler documentation:
+https://docs.nvidia.com/hpc-sdk/compilers/hpc-compilers-user-guide/index.html
+***************************************
+
 basic compiling:  nvfortran -o filename filename.cuf 
+
+suboptions: the following are equivalent(i.e., use comma for additional suboptions)
+nvfortran -Mvect=simd -Mvect=noaltcode  
+nvfortran -Mvect=simd,noaltcode
 
 cuda-gdb debug (incl in CUDA SDK):  nvfortran -g -gpu=nordc filename.cuf ( will generate file "a.out")
 				    

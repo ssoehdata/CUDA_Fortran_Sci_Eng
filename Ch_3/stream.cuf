@@ -1,17 +1,21 @@
-! obtains the effective bandwidth (number of bytes read per kernel).
+! This obtains the effective bandwidth (number of bytes read per kernel).
+! see comments in the peakBandwidth.cuf(for obtaining the theoretical peak bandwidth)
+! about device bandwidth and performance considerations.
+
+! the measured effective bandwidth is dependent on many factors(e.g.: array size, precision etc.)
 
 module m 
     use, intrinsic :: iso_fortran_env 
     integer, parameter :: fpKind = real64 
 contains
-    attributes(global) subroutine copy(1hs, rhs, n)
+    attributes(global) subroutine copy(lhs, rhs, n)
         implicit none 
-        real(fpKind) :: 1hs(*)
+        real(fpKind) :: lhs(*)
         real(fpKind) :: rhs(*)
         integer, value :: n 
         integer :: i 
         i = blockDim%x * (blockIdx%x - 1) + threadIdx%x 
-        if (i <= n) 1hs(i) = rhs(i)
+        if (i <= n) lhs(i) = rhs(i)
     end subroutine copy 
 end module m 
 
@@ -51,7 +55,7 @@ program stream
     if (fpKind == real32)  print "('real32')"
     print "('Array size (bytes): ', i0)", sizeof(a_d)
     print "('Copy effective bandwidth: ', f10.1)", & 
-            nBytes/time/1.0E+6 
+        nBytes/time/1.0E+6 
 
 end program stream
 

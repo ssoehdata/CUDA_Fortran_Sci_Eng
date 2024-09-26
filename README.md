@@ -12,8 +12,8 @@ Learning the NVIDIA HPC SDK / Cuda Fortran
 
 
 ### Table of Contents
-#### <ul><li>Ch_1    Introduction / Basic Concepts</ul></li>
-#### <ul><li><Ch_2  Correctness, accuracy, and debugging</ul></li> 
+#### <ul><li>Ch_1   Introduction / Basic Concepts</ul></li>
+#### <ul><li>Ch_2   Correctness,accuracy,and debugging</ul>></li> 
 #### <ul><li>Ch_3   Performance measurement and metrics</ul></li>
 #### <ul><li>Ch_4   Synchronization</ul></li>
 #### <ul><li>Ch_5   Optimization</ul></li>
