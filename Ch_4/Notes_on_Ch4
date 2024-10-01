@@ -1,4 +1,3 @@
-This chapter on synchronization focusses on CUDA Fortran's syncrhonization features.
-Specfically, syncrhonization refers operations running in parallel. Synchronization between 
-the host thread, kernels and data transfers between the host and device are addressed.
+This chapter on synchronization focuses on CUDA Fortran's syncrhonization features.
+Specfically, syncrhonization refers to operations running in parallel. Synchronization between the host thread, kernels and data transfers between the host and device are addressed.
 Additionally, syncrhonization between device threads running within a kernel, incl. barrier synchronization, memory fences, and the cooperative groups feauture in the CUDA Toolkit are covered. 
