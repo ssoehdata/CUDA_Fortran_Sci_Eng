@@ -1,3 +1,13 @@
+! Asyncrhonous transfers using cudaMemcpyAsync()
+! The cudaMemcpyAsync() alllows acheiving of overlap in several ways. 
+! The kernel will not start executing until the data transfer is complete,
+! but the host and subroutine cpuRoutine() can overlap their execution. 
+! This is accomplished by using nonnull streams for all data transfers and
+! kernel launches.  
+
+
+
+
 program pipeline
     use cudafor 
     implicit none 

@@ -1,0 +1,52 @@
+! This demonstrates the cudaStreamSynchronize() function, which
+! is used to ensure tasks in a given stream are completed before
+! some activity in another stream. The goal being optimum overlap.
+
+! This example uses three CUF kernels issued to three streams.
+! A fourth CUF kernel is dependent on the data in the first two kernels.
+! Launching this fourth Kernel (line 31),for example in Stream2, will ensure
+! that the second kernel has finished before the fourth commences, and this requires a 
+! synchronozation barrier to ensure the second kernel has finished before the fourth is launched.
+! using cudaDeviceSynchronize() would require waiting for the third kernel to complete, which
+! could take longer than the others. 
+
+
+program streamSync
+    use cudafor 
+    implicit none 
+    integer, parameter :: n=100000
+    real, device :: a_d(n), b_d(n), c_d(n)
+    integer(kind=cuda_stream_kind) :: stream1, stream2, stream3 
+    integer :: istat, i, j 
+
+    istat = cudaStreamCreate(stream1)
+    istat = cudaStreamCreate(stream2)
+    istat = cudaStreamCreate(stream3)
+
+    !$cuf kernel do <<<1, 1,stream=stream1>>>
+    do i = 1, n                                 ! CUF kernel 1
+        a_d(i) = i 
+    enddo 
+
+    !$cuf kernel do <<<1,1,stream=stream2>>>     
+    do i = 1, n                                 ! CUF kernel 2
+        c_d(i) = i 
+    enddo 
+
+    !$cuf kernel do <<<1,1, stream=stream3>>>
+    do i = 1, n                                 ! CUF kernel 3
+        c_d(i) = 1.0/i 
+    enddo 
+
+    istat = cudaStreamSynchronize(stream1)   ! ensures prev actions (in this example stream1)
+                                             ! have completed before returning control to the CPU
+
+    !$cuf kernel do <<<1,1,stream=stream2>>>
+    do i = 1, n                              ! CUF kernel 4
+        a_d(i) = a_d(i) + b_d(i)
+    enddo 
+
+    istat = cudaStreamDestroy(stream1)       ! note: a synchronization barrier is not required before calling this cudaStreamDestroy()
+    istat = cudaStreamDestroy(stream2)       ! this is because this is called, it returns immediately and associated resources with 
+    istat = cudaStreamDestroy(stream3)      ! the stream are released once all work in the stream is completed.
+end program streamSync 
