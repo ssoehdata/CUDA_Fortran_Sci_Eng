@@ -1,5 +1,7 @@
 ! implicit synchronization behaviour of kernels submitted 
 ! to streams created by cudaStreamCreate():
+! Two different CUF kernels operate on different slices of the same device array. 
+!
 
 program twoKernels
     use cudafor 

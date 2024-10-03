@@ -1,0 +1,16 @@
+attributes(global) subroutine dynamicReverse_coopAuto(d, n)
+    use cooperative_groups
+    implicit none 
+    real :: d(n)
+    integer, value :: n 
+    real, shared :: s(n)
+    integer :: t, tr
+    type(thread_group) :: tg
+
+    t = threadIdx%x 
+    tr = blockDim%x-t+1
+
+    s(t) = d(t)
+    call syncthreads(thread_group) 
+    d(t) = s(tr)
+end subroutine dynamicReverse_coopAuto 

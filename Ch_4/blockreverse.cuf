@@ -1,0 +1,15 @@
+attributes(global) subroutine dynamicReverseAuto(d, n)
+    implicit none 
+    real :: d(n)
+    integer, value :: n 
+    real, shared :: s(n)
+    integer :: t, tr 
+
+    t = threadIdx%x 
+    tr = n-t+1 
+
+    s(t) = d(t)
+    call syncthreads() 
+    d(t) = s(tr)
+end subroutine dynamicReverseAuto 
+
