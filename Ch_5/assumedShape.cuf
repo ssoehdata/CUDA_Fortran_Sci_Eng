@@ -1,0 +1,44 @@
+! compile with added flag -gpu=ptxinfo 
+! this will show the differences in resource utilization between the two
+! kernels
+! the kernel w/assumedshape declarations uses over 4x the number of registers
+! as the kernel w/assumedsize declarations 42 vs. 10 registers. 
+
+! These registers are not shared amongst the threads, rather every device
+! in the thread block will use thise many registers(thus can greatly limit
+! the number of threads and consequently thread blocks that can concurrently
+! reside on a multiprocessor).
+
+! Best practice: In CUDA Fortran always use assumed-size rather than
+! assumed-shape declarations.
+
+
+
+module m 
+contains 
+    attributes(global) subroutine assumedSizeArrays(a, b, c, nx, ny)
+        implicit none 
+        real :: a(nx, ny, *), b(nx, ny, *), c(nx,ny,*)
+        integer, value :: nx, ny 
+        integer :: i, j, k 
+
+        i = (blockIdx%x-1)*blockDim%x + threadIdx%x 
+        j = (blockIdx%y-1)*blockDim%y + threadIdx%y 
+        k = (blockIdx%z-1)*blockDim%z + threadIdx%z
+
+        c(i,j,k) = a(i,j,k) + b(i,j,k)
+    end subroutine assumedSizeArrays 
+
+    attributes(global) subroutine assumedShapeArrays(a,b,c)
+        implicit none 
+        real :: a(:,:,:), b(:,:,:), c(:,:,:)
+        integer :: i, j, k 
+
+        i = (blockIdx%x-1)*blockDim%x + threadIdx%x 
+        j = (blockIdx%y-1)*blockDim%y + threadIdx%y 
+        k = (blockIdx%z-1)*blockDim%z + threadIdx%z
+
+        c(i,j,k) = a(i,j,k) + b(i,j,k)
+    end subroutine assumedShapeArrays 
+end module m
+
