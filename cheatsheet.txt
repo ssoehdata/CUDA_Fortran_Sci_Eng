@@ -7,7 +7,18 @@ compiler documentation:
 https://docs.nvidia.com/hpc-sdk/compilers/hpc-compilers-user-guide/index.html
 ***************************************
 
-basic compiling:  nvfortran -o filename filename.cuf 
+#################################################
+Some Terms:(refer to the  hpc cuda fortran programming documentation 
+            for more listings and examples [vers. 21.9 incl. in this repo])
+
+Device - GPU
+Host - CPU
+Cuda Stream - a sequence of operations performed in order on the device.
+
+############################################################################
+
+******************************************************
+basic compiling:  nvfortran filename.cuf -o filename 
 
 suboptions: the following are equivalent(i.e., use comma for additional suboptions)
 nvfortran -Mvect=simd -Mvect=noaltcode  
@@ -25,7 +36,7 @@ FMA(Fused Multiply Add) in a single instruction: - is used by default in cudafor
 			 			 
 			 			 options: 	  Function:
 			 			 -gpu[no]flushz   flushes denormals to zero
-			 			 		  (controls single-precision denormals)	
+			 			 		          (controls single-precision denormals)	
 			 			 		  
 			 			 -gpu=fastmath  for 32bit float data 
 			 			 		fast but less accurate operations
