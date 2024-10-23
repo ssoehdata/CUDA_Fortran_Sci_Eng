@@ -1,6 +1,6 @@
-########################################################################
-# Collection of some cudafor compiling and related cuda tooling info   #
-########################################################################
+#################################################################################
+# Collection of some cudafor compiling and related cuda tooling  terms and info #
+#################################################################################
 
 **************************************
 compiler documentation:
@@ -12,8 +12,9 @@ Some Terms:(refer to the  hpc cuda fortran programming documentation
             for more listings and examples [vers. 21.9 incl. in this repo])
 
 Device - GPU
-Host - CPU
+Host   - CPU
 Cuda Stream - a sequence of operations performed in order on the device.
+Kernel      - subroutine that executes on the device but is called from the host.
 
 ############################################################################
 

@@ -1,0 +1,39 @@
+##############
+# Notes Ch_4 #
+##############
+Data transfers between the host and the device can be another source of parallelism in CudaFortran.
+
+The ability to parallelize data transfers between the host and device with other operations
+and the implicit synchronization of such operations, depends in part whether the host mem involved in the transfer is pageable or pinned memory. 
+
+Pageable Memory - when mem is allocated for variables that reside on the host, pageable 
+                  memory is used by default. 
+                - can be swapped out to disk to use more mem than available in RAM on the 
+                  on the host system. 
+
+Pinned Memory   - when data is transferred between the host and device, the direct memory
+                  access (DMA) engine on the GPU must target  page-locked or "pinned" 
+                  host memory. 
+                - can not be swapped out and therefore is always available for such 
+                  transfers. 
+                - cost of the transfer between pageable mem and pinned host buffer can 
+                  be avoided if the host arrays to use pinned memory are declared. 
+
+
+Example of declaring and allocation of pinned memory with error checking: 
+
+integer :: n, istat 
+logical :: pinnedFlag 
+real, allocatable, pinned :: a_h(:)
+if (istat /=0) print *, 'Allocation of a_h failed'
+if (.not. pinnedFlag) & 
+    print *, 'Pinned allocation of a_h failed'
+
+
+Streams  - a sequence of operations performed in order on the device. 
+
+a_d  for device data 
+a_h  for host data 
+
+
+
