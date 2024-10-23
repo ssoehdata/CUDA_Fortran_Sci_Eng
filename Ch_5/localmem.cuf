@@ -1,4 +1,4 @@
-! compile with flag -gpu=nptxinfo 
+! compile with flag -gpu=ptxinfo 
 
 module localmem
     implicit none 
