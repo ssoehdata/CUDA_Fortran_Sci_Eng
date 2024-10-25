@@ -1,0 +1,40 @@
+! when compiling this program with compiler flag -gpu=keep 
+! and alternately with the addition of alternatively -gpu=nofma, and then -gpu=fma
+! (fma being fusing multiply and add instructions)
+! gives results discussed here:
+
+
+! Inspection of the PTX generated file (see file compile_ex.n001.ptx) 
+! will show fma.rn.f32  %f4, %f2, %f3, %f1;  (line 36 in compile_ex.with_fma.ptx) 
+! where the full-width product is used followed by a 
+! single rounding step.
+
+! when compiling with the -gpu=nofma option, the PTX file
+! contains the following (see repo compile_ex._no_fma.ptx in lines 36 and 37 respectively)
+! mul.rn.ftz.f32   %f4, %f2, %f3;  
+! add.rn.ftz.f32   %f5, %f1, %f4;  
+
+! The FMA instruction will execute faster than the separate MUL and ADD instructions
+! owing to dedicated hardware for those instructions.
+
+! FMA will generally be more accurate than separate MUL and ADD instructions owing
+! owing to the lack of any truncation or rounding of the product prior to the 
+! addition in FMA.
+
+! *****************************************************************************
+! also the option -gpu=flushz (denormals are flushed to zero) will generally 
+! execute faster than code with -gpu=noflushz.
+! *****************************************************************************
+
+
+module m
+    contains
+        attributes(global) subroutine k(a, b, c) 
+            real :: a, b, c 
+            c = a*b+c 
+        end subroutine k 
+end module m 
+
+program main 
+    print *, "degbug text" 
+end program main 

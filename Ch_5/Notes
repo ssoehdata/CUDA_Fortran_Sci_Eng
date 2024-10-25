@@ -1,0 +1,14 @@
+Some compiler options for optimization: 
+
+-gpu=keep   fuses multiply and add instructions
+for the module below,
+
+e.g. 
+    module m
+    contains
+        attributes(global) subroutine k(a, b, c) 
+            real :: a, b, c 
+            c = a*b+c 
+        end subroutine k 
+    end module m 
+
