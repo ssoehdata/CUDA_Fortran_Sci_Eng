@@ -7,6 +7,8 @@
 ! When the source code is in a file with a .F90 extension, the preprocessor 
 ! is invoked automatically, and the code is compiled as normal Fortran:
 
+! if the -cuda flag is used, the the _CUDA symbol is defined and the CUDA Fortran version is compiled.
+
 program main 
 #ifdef _CUDA 
     use cudafor 
