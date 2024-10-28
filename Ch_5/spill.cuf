@@ -1,0 +1,44 @@
+! compile with flag -gpu-ptxinfo
+! demonstrates specifying a max number of threads per block as 1024 and a min 
+! of two blocks to simultaneously reside on a multiprocessor, the 64K registers must be
+! divided amongst the 2048 threads resulting in a maximum of 32 registers per thread 
+! for the second kernel. This info is shown in the gpu=ptxinfo output.
+
+module spill 
+contains 
+    attributes(global) subroutine k(a, n)
+    integer :: a(*)
+    integer, value :: n 
+    integer, parameter :: nb = 32 
+    integer :: b(nb), tid, i 
+    tid = blockDim%x*(blockIdx%x-1) + threadIdx%x 
+    do i = 1, nb 
+        b(i) = a(mod(tid-1+i,n)+1)
+    enddo 
+    do i = 2, nb 
+        b(1) = b(1) + b(i)
+    enddo
+    a(tid) = b(i) + b(i)
+end subroutine k 
+
+
+    attributes(global) launch_bounds(1024,2) subroutine k1b(a,n)
+        integer :: a(*)
+        integer, value :: n 
+        integer, parameter :: nb = 32 
+        integer :: b(nb),  tid, i 
+        tid = blockDim%x*(blockIdx%x-1) + threadIdx%x 
+        do i = 2, nb 
+            b(1) = a(mod(tid-1,n)+1)
+        enddo 
+        do i = 2, nb 
+            b(1) = b(1) + b(i)
+        enddo 
+        a(tid) = b(1)
+    end subroutine k1b
+end module spill
+
+
+program main 
+    print *, "debug text"
+end program main 
