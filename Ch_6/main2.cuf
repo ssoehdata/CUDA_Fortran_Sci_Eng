@@ -1,0 +1,26 @@
+! Both loops have an independence between iterations that allows the use 
+! of CUF kernels, so the code can be ported by declaring the arrays 
+! as managed and using CUF kernels. 
+
+program main2 
+    use cudafor
+    implicit none 
+    integer, parameter :: n=8 
+    real, managed ::  a(n), b(n)
+    integer :: i 
+
+    !$cuf kernel do<<<*,*>>> 
+    do i = 1, n 
+        a(i) = i+1 
+    enddo 
+
+    !$cuf kernel do<<<*,*>>> 
+    do i = 1, n 
+        b(i) = a(i)+1 
+    enddo 
+
+    i = cudaDeviceSynchronize()
+
+    print *, a 
+    print *, b 
+end program main2
