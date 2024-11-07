@@ -14,3 +14,11 @@ e.g.
         end subroutine k 
     end module m 
 
+**************************
+Terms: 
+
+
+warp - threads in a thread block partitioned into groups of 32 threads.
+
+local memory - named this way due to its scope being local to the thread
+                (not to its physical location).
