@@ -1,0 +1,13 @@
+This chapter focusses on coding styles and techniques for reducing the effort involved 
+in porting applications to CUDA Fortran. 
+
+One aim in porting over to Cuda Fortran is to leave the GPU code intact so that the same source code 
+can be compiled to run on either the CPU or GPU  by the omission or addition of the -cuda compiler option. 
+
+
+
+
+Several ported larger code examples were created by the authors than included here.
+These can be found at: 
+https://github.com/PhysicsofFluids/AFiD_GPU_opensource
+
