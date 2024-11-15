@@ -11,3 +11,20 @@ Several ported larger code examples were created by the authors than included he
 These can be found at: 
 https://github.com/PhysicsofFluids/AFiD_GPU_opensource
 
+
+N.B.: When compiling the examples with the .F90 extension, they should be compile twice 
+      for comparison of the output. One simply using nvfortran as usual, the other 
+      instance should include the -cuda flag in the compile line to obtain the GPU 
+      version output.
+
+Comiling notes for memfootprint.cuf and union_m.o module.:
+
+$ nvfortran -c union_m.cuf 
+$ nvfortran memfootprint.cuf union_m.o 
+
+memfootprint.cuf: 
+
+****  then run:  $ ./a.out 
+
+
+

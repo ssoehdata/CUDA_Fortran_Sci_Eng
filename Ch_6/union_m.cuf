@@ -1,0 +1,54 @@
+! compile with nvfortran -c union_m.cuf to generate the object file
+! then link with the memfootprint.cuf program in the following manner: 
+! nvfortran memfootprint.cuf union_m.o 
+! memfootprint: 
+! $ ./a.out
+
+! "Here union is a generic interface to two routines.One points 
+! a complex rank-one pointer to a real rank-one array for host data
+! and another for device data. 
+! The host version uses the loc() function that returns the address as an integer 
+! then uses the transfer function to initialize a type(c_ptr) instance pointing to 
+! the real first argument, followed by the c_f_pointer() routine that associates Fortran
+! pointer of complex type with the same memory.
+! In the device version of this c_devptr() function in the cuda module is used to initialize
+! an instance of type(c_devptr), followed by a call to an overload version of c_f_pointer()
+! that accepts device data." (P. 186, Reutsch,Fatica, Cuda Fortran for Scientists and Engineers).
+
+
+
+module union 
+
+    interface union 
+        module procedure union_r4c4, union_r4dc4d 
+    end interface union 
+
+contains 
+    
+    subroutine union_r4c4(s, d_ptr)
+        use iso_c_binding 
+        implicit none 
+        real(4) :: s(:)
+        complex(4), pointer :: d_ptr(:)
+        type(c_ptr) :: s_cptr
+        integer :: d_shape(1)
+
+        d_shape(1) = size(s)/2 
+        s_cptr = transfer(loc(s), s_cptr)
+        call c_f_pointer(s_cptr, d_ptr, d_shape)
+    end subroutine union_r4c4 
+
+    subroutine union_r4dc4d(s, d_ptr)
+        use cudafor 
+        implicit none 
+        real(4), device :: s(:)
+        complex(4), device, pointer :: d_ptr(:)
+        type(c_devptr)  :: s_cptr
+        integer :: d_shape(1)
+
+        d_shape(1) = size(s)/2 
+        s_cptr = c_devloc(s)
+        call c_f_pointer(s_cptr, d_ptr, d_shape)
+    end subroutine union_r4dc4d 
+
+end module union 
