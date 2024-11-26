@@ -26,5 +26,6 @@ Learning the NVIDIA HPC SDK / Cuda Fortran
 #### <ul><li>Ch_11  Applications of the fast Fourier transform (FFT)</ul></li>
 #### <ul><li>Ch_12  Ray tracing</ul></li>
 #### <ul><li>Appendix (not incl. in repo)</ul></li>
+#### <ul><li>Some Examples from the Programming Guide</ul></li>
 
 #### <ul><li>The Cuda Fortran Programming Guide(Version 21.9) is also incl. in this repo</ul></li>
