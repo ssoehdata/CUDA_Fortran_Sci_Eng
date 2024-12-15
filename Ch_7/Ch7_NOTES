@@ -1,0 +1,18 @@
+Ch.7 focusses on interfacing CUDA Fortran with CUDA C.
+It makes use of the iso_c_binding module included in the Fortran 2003 standard.
+
+
+
+
+#######################################################################################
+
+The three files thrust.cu, thrust.cuf and testSort.cuf are to be compiled successively in this manner: 
+
+$ nvcc -c arch=sm_75 -o thrust.C.o thrust.cu 
+
+followed by: 
+
+$ nvfortran -gpu=cc75 thrust.cuf testSort.cuf thrust.C.o -c++libs 
+
+$ ./a.out 
+
