@@ -1,3 +1,16 @@
+This chapter covers optimization. 
+    This topic is addressed by discussing the following: 
+
+    - Data transfers, which can be broken down into two main categories: 
+         - optimizing data transfers between host and device memories. 
+         - optimizing data transfers between different memories on the device. 
+     
+     Also covered in this chapter factors involved in deciding how to choose execution 
+        configurations with the aim towards efficient hardware utilization.  
+    
+     Instructional optimizations are also covered. 
+
+
 Some compiler options for optimization:
 
 (see file compiler_ex.cuf in repo for notes on on options and instruction references in the generated ptx files)

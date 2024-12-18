@@ -1,0 +1,6 @@
+This chapter addresses verification for correctness of the results obtained from the GPU. 
+Two aspects are discussed: 
+	- the first concerns numerical accuracy issues inherent in any floating-point computation 
+          performed in parallel, as well as some compiler flags, which affect numerical accuracy on the GPU.
+          
+        - the second concerns programming errors and tools, such as cuda-memcheck and cuda-gdb, that can aid in error  correction.

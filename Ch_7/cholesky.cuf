@@ -6,7 +6,7 @@
 ! solve via cusolverDnXpotrs(). 
 
 
-program main        ! from S.216
+program main        
     use cudaforEx
     use cublas 
     use cusolverDN

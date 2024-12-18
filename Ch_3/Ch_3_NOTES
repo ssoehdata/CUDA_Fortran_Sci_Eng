@@ -1,0 +1,9 @@
+This chapter covers timing of code sections on the GPU via a variety of approaches including;
+    - instrumenting the code with CPU and GPU timers
+    - using tools such as NVIDIA Nsight Systems and Compute
+
+    Also covered is how timing information can be used to determine the limiting factor 
+    of kernel execution. 
+
+    In addition, performance metric calculations methods, in particular as related to bandwidth as
+    well as the interpretation of such metrics are covered.
