@@ -28,4 +28,4 @@ Learning the NVIDIA HPC SDK / Cuda Fortran
 #### <ul><li>Appendix (not incl. in repo)</ul></li>
 #### <ul><li>Some Examples from the Programming Guide</ul></li>
 
-#### <ul><li>The Cuda Fortran Programming Guide(Versions 21.9, and 25.1) are also incl. in this repo</ul></li>
+#### <ul><li>The Cuda Fortran Programming Guide(both Versions 21.9, and 25.1) as well as the UsersGuide (with compilation info) are also incl. in this repo</ul></li>
