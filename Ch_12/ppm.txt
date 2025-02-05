@@ -1,0 +1,12 @@
+P3 
+3 2 
+255  
+# The part above is the header 
+# "P3" Identifies the file format (RGB colors in ASCII)
+# The part below is image data in RGB triplets 
+255 0 0 # red 
+0 255 0 # green 
+0 0 255 # blue
+255 255 0 # yellow
+0 255 255 # cyan 
+255 255 255 # white 
