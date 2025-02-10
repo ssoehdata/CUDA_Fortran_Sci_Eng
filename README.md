@@ -13,16 +13,16 @@ Learning the NVIDIA HPC SDK / Cuda Fortran
 
 ### Table of Contents
 #### <ul><li>Ch_1   Introduction / Basic Concepts</ul></li>
-#### <ul><li>Ch_2   Correctness,accuracy,and debugging</ul></li> 
+#### <ul><li>Ch_2   Correctness, accuracy, and debugging</ul></li> 
 #### <ul><li>Ch_3   Performance measurement and metrics</ul></li>
 #### <ul><li>Ch_4   Synchronization</ul></li>
 #### <ul><li>Ch_5   Optimization</ul></li>
 #### <ul><li>Ch_6   Porting tips and techniques</ul></li>
-#### <ul><li>Ch_7   Interfacing withy CUDA C code and CUDA libraries</ul></li>
+#### <ul><li>Ch_7   Interfacing with CUDA C code and CUDA libraries</ul></li>
 #### <ul><li>Ch_8   Multi-GPU programming</ul></li>
 #### <ul><li>PART 2 Case Studies</ul></li>
 #### <ul><li>Ch_9   Monte Carlo method</ul></li>
-#### <ul><li>Ch_10  Finie difference method</ul></li>
+#### <ul><li>Ch_10  Finite difference method</ul></li>
 #### <ul><li>Ch_11  Applications of the fast Fourier transform (FFT)</ul></li>
 #### <ul><li>Ch_12  Ray tracing</ul></li>
 #### <ul><li>Appendix (not incl. in repo)</ul></li>
