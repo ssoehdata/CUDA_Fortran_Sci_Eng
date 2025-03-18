@@ -1,10 +1,26 @@
-This chapter addresses  two scenarios: 
-    - using multiple GPUs from a single host thread  and
-    - using MPI where each MPI process uses a separate GPU.
+#################################################################
+                                                                #
+This chapter addresses  two scenarios:                          #
+    - using multiple GPUs from a single host thread  and        #
+    - using MPI where each MPI process uses a separate GPU.     #
+#################################################################
 
 N.B.: Although I have compiled and run all the files in the repo, note that I do not have more than 1 GPU on my 
       machine (donations gladly accepted to remedy this situation!!!). In spite of this, I have decided to include the 
       examples from this chapter as I think they are of particular interest (the MPI examples for example). I will  
       compile and run the source code to the best of my machines limits, so be aware that I might not catch any runtime errors
       that might be missed by the compiler. 
+
+
+
+#####################################################################################################
+Some additional switches for the nvidia-smi (Nvidia's System Management Interface) terminal command #
+#####################################################################################################
+
+In the terminal, the following command displays the devices present:
+nvidia-smi -L 
+
+
+To query the compute mode (as well as driver, number of GPUs present, and CUDA version) enter in the terminal:
+nvidia-smi -q -d COMPUTE 
 
