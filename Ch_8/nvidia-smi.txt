@@ -1,0 +1,10 @@
+#####################################################################################################
+Some additional switches for the nvidia-smi (Nvidia's System Management Interface) terminal command #
+#####################################################################################################
+
+In the terminal, the following command displays the devices present:
+nvidia-smi -L 
+
+
+To query the compute mode (as well as driver, number of GPUs present, and CUDA version) enter in the terminal:
+nvidia-smi -q -d COMPUTE 
