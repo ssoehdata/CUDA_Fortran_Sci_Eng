@@ -1,6 +1,6 @@
 ! compile with: nvfortran -o fft_test_sp precision_m.F90 fft_test_c2c.cuf -cudalib=cufft 
 ! followed by nvfortran -DDOUBLE -o fft_test_dp precision_m.F90 fft_test_c2c.cuf \ -cudalib=cufft 
-! when runniing the generated file (./fft_test_sp) generates the results found in the file of same name in this repo
+! when running the generated file (./fft_test_sp) generates the results found in the file of same name in this repo
 
 program fft_test_c2c
   use precision_m

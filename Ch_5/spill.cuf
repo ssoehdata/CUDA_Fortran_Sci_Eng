@@ -1,4 +1,4 @@
-! compile with flag -gpu-ptxinfo
+! compile with flag -gpu=ptxinfo
 ! demonstrates specifying a max number of threads per block as 1024 and a min 
 ! of two blocks to simultaneously reside on a multiprocessor, the 64K registers must be
 ! divided amongst the 2048 threads resulting in a maximum of 32 registers per thread 
