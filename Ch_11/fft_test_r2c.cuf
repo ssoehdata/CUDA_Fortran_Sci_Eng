@@ -1,5 +1,5 @@
 ! ################################
-!   compile with -cudalib=cufft                 #
+!   compile with -cudalib=cufft                 
 ! ################################
 
 program fft_test_r2c
