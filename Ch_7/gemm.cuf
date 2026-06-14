@@ -1,4 +1,4 @@
-! compile with -cudalib=cudablas 
+! compile with -cudalib=cublas 
 
 ! Tensor core support for 32 bit floating point data uses Tensor Float 32(TF32) format
 ! which uses the same 8-bit exponent as an FP32 format but uses a mantissa of 10 
