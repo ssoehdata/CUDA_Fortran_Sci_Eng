@@ -1,0 +1,6 @@
+For cases where the cost of branch divergence and noncoalesced data access is severe, a preferable option may be 
+to gather the data that satisfy the criteria into an array , perform the calculations on that compacted array, and then
+scatter the results back into the original array. 
+
+This can be peformed using the compact module.
+Array compaction is performed on the device using the compact() routine.
