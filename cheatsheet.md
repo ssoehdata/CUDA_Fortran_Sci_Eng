@@ -1,27 +1,28 @@
-#################################################################################
-# Collection of some cudafor compiling and related cuda tooling  terms and info #
-#################################################################################
 
-**************************************
+## Collection of some CUDA Fortran compiling and related terms and info 
+
 compiler documentation:
 https://docs.nvidia.com/hpc-sdk/compilers/hpc-compilers-user-guide/index.html
 ***************************************
 
-#################################################
 Some Terms:(refer to the  hpc cuda fortran programming documentation 
             for more listings and examples [vers. 21.9 incl. in this repo])
-
-Device - GPU
-Host   - CPU
-Cuda Stream - a sequence of operations performed in order on the device.
-Kernel      - subroutine that executes on the device but is called from the host.
-
-############################################################################
+<ul>	
+	<li>Device - GPU</li>
+	<li>Host   - CPU</li>
+	<li>Cuda Stream - a sequence of operations performed in order on the device.</li>
+	<li>Kernel      - subroutine that executes on the device but is called from the host.</li>	
+</ul>
 
 ******************************************************
-basic compiling:  nvfortran filename.cuf -o filename 
+#### Basic compilation:  
+	$ nvfortran filename.cuf -o filename 
 
-suboptions: the following are equivalent(i.e., use comma for additional suboptions)
+Compiler Syntax: 
+	
+	nvfortran [options] [path]filename [...]
+
+#### Suboptions: the following are equivalent(i.e., use comma for additional suboptions)
 nvfortran -Mvect=simd -Mvect=noaltcode  
 nvfortran -Mvect=simd,noaltcode
 
@@ -46,34 +47,52 @@ FMA(Fused Multiply Add) in a single instruction: - is used by default in cudafor
 			 			 		     routine (e.g. __fdivide(x,y), __sinf(x),
 			 			 		     	     (__logf(x)  etc.)		 			 	
 
-##################################################################
+
+******************************************************
 NVTX (NVIDIA Tools Exension) / NVIDIA Insight (CLI commands)
 Documentation: https://docs.nvidia.com/nsight-systems/UserGuide/index.html
 
+******************************************************
 Two Options:  CLI and GUI
-
-##################################################################
+******************************************************
 Nsight Systems CLI
-##################
+
 nsys stats via command line (e.g.:Bash): 
-    examples:  $ nsys stats --report cuda_gpu_trace filename.nsys-rep
-// 
-               $ nsys stats --report cuda_gpu_sum filename.nsys-rep
+<ul>
+    <li>examples:</li>
+	
+	$ nsys stats --report cuda_gpu_trace filename.nsys-rep
+	
+    $ nsys stats --report cuda_gpu_sum filename.nsys-rep 
 
-// A Full listing of Available (built-in) Reports w/ short descriptor are found with: 
+A Full listing of Available (built-in) Reports w/ short descriptor are found with: 
                $ nsys stats --help-reports
+</ul>
 
-##################################################################
 Nsight Systems GUI
-##################
-to launch nsight gui: $ nsys-ui 
+*******************************************************
+to launch nsight gui: 
+	
+	$ nsys-ui 
 
-version:  nsys --version
-check status: nsys status --environment
-NB.: settings: kernel paranoid must be set to level <=2
+version:  
+
+	$ nsys --version
+	
+check status: 
+
+    $ nsys status --environment
+	
+NB.: Settings: kernel paranoid must be set to level <=2
 
 
 compile/generate report for nsight with nvtx: 
-example: nvfortran -o nvtxBasic nvtxBasci.cuf -cudalib=nvtx 
-generate the report:  nsys profile -o nvtBasic a.out 
-(this can then be opened in the nvsight viewer)
+example: 
+
+	$ nvfortran -o nvtxBasic nvtxBasci.cuf -cudalib=nvtx 
+	
+generate the report:  
+
+    $	nsys profile -o nvtBasic a.out 
+	
+(*this can then be opened in the nvsight viewer*)
